@@ -1,0 +1,87 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+import Logo from '../ui/Logo.astro';
+---
+
+<nav class="sticky top-0 z-50 bg-canvas/80 backdrop-blur-sm border-b border-hairline relative">
+  <div class="max-w-[1400px] w-full mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="/" class="flex items-center group">
+      <Logo className="w-8 h-8 mr-2 transition-transform group-hover:scale-105" />
+      <span class="flex items-baseline">
+        <span class="font-semibold text-ink tracking-tight text-lg">fxlotsizecalculator</span>
+        <span class="text-mute text-sm ml-0.5">.com</span>
+      </span>
+    </a>
+    
+    <!-- Desktop Menu -->
+    <div class="hidden md:flex items-center gap-6 mr-auto ml-8">
+      <a href="/forex" class="text-body text-sm hover:text-ink transition-colors">Forex</a>
+      <a href="/gold" class="text-body text-sm hover:text-ink transition-colors">Gold</a>
+      <a href="/indices" class="text-body text-sm hover:text-ink transition-colors">Indices</a>
+      <a href="/crypto" class="text-body text-sm hover:text-ink transition-colors">Crypto</a>
+      <a href="/futures" class="text-body text-sm hover:text-ink transition-colors">Futures</a>
+      <a href="/margin" class="text-body text-sm hover:text-ink transition-colors">Margin</a>
+      <a href="/swap" class="text-body text-sm hover:text-ink transition-colors">Swap</a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <div class="hidden md:flex items-center gap-4">
+        <a href="/#faq" class="text-body text-sm hover:text-ink transition-colors">FAQ</a>
+        <a href="/#how-it-works" class="text-body text-sm hover:text-ink transition-colors">How It Works</a>
+        <div class="h-4 w-px bg-hairline"></div>
+      </div>
+      <ThemeToggle />
+      
+      <!-- Mobile Hamburger Button -->
+      <button id="mobile-menu-btn" class="md:hidden ml-2 p-1 text-body hover:text-ink" aria-label="Toggle Menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path id="hamburger-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Dropdown -->
+  <div id="mobile-menu" class="hidden md:hidden absolute top-16 left-0 right-0 bg-canvas border-b border-hairline px-6 py-4 shadow-xl">
+    <div class="flex flex-col gap-4">
+      <a href="/forex" class="text-body font-medium hover:text-ink transition-colors">Forex</a>
+      <a href="/gold" class="text-body font-medium hover:text-ink transition-colors">Gold</a>
+      <a href="/indices" class="text-body font-medium hover:text-ink transition-colors">Indices</a>
+      <a href="/crypto" class="text-body font-medium hover:text-ink transition-colors">Crypto</a>
+      <a href="/futures" class="text-body font-medium hover:text-ink transition-colors">Futures</a>
+      <a href="/margin" class="text-body font-medium hover:text-ink transition-colors">Margin</a>
+      <a href="/swap" class="text-body font-medium hover:text-ink transition-colors">Swap</a>
+      <hr class="border-hairline" />
+      <a href="/#faq" class="text-body font-medium hover:text-ink transition-colors">FAQ</a>
+      <a href="/#how-it-works" class="text-body font-medium hover:text-ink transition-colors">How It Works</a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const setupMobileMenu = () => {
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    const hamburgerIcon = document.getElementById('hamburger-icon');
+    const closeIcon = document.getElementById('close-icon');
+
+    if (btn && menu && hamburgerIcon && closeIcon) {
+      // Remove old listeners if re-running
+      const newBtn = btn.cloneNode(true);
+      btn.parentNode?.replaceChild(newBtn, btn);
+      
+      newBtn.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+        hamburgerIcon.classList.toggle('hidden');
+        closeIcon.classList.toggle('hidden');
+      });
+    }
+  };
+
+  // Run on initial load
+  setupMobileMenu();
+
+  // Run on Astro view transitions if they are enabled
+  document.addEventListener('astro:page-load', setupMobileMenu);
+</script>

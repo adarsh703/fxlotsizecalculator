@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/layout/Navbar.astro';
+import Hero from '../components/sections/Hero.astro';
+import Features from '../components/sections/Features.astro';
+import ProTeaser from '../components/sections/ProTeaser.astro';
+import HowItWorks from '../components/sections/HowItWorks.astro';
+import FAQ from '../components/sections/FAQ.astro';
+import Footer from '../components/layout/Footer.astro';
+import { Calculator } from '../components/calculator/Calculator';
+---
+
+<Layout
+  title="Forex Lot Size Calculator | MT4 & MT5 Position Size"
+  description="Accurate Forex lot size calculator for MT4 and MT5. Calculate your exact position size in lots based on risk percentage, stop loss in pips, and account balance."
+  keywords="forex lot size calculator, lot size calculator forex, lot size calculator mt5, forex lot size calculator mt5, metatrader lot size calculator, mt4 lot size calculator"
+  ogImage="/og-forex.png"
+>
+  <Navbar />
+  <main>
+    <Hero 
+      eyebrow="MT4 & MT5 Lot Size Calculator"
+      title="Calculate your <span class='text-blue-500'>Forex</span> lot size. Instantly."
+      description="Enter your risk parameters or upload a chart. Get exact forex position sizing in real time."
+    />
+    <Calculator client:load initialInstrument="EURUSD" />
+    <ProTeaser />
+    <Features />
+    <HowItWorks />
+    <FAQ />
+  </main>
+  <Footer />
+</Layout>

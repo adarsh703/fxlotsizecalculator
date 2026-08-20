@@ -1,0 +1,47 @@
+---
+/**
+ * Hero section with mesh gradient backdrop.
+ * Vercel-inspired: mono eyebrow, tight-tracked headline, body lead.
+ */
+
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+}
+
+const {
+  eyebrow = "Position Size Calculator",
+  title = "Calculate your forex lot size. Instantly.",
+  description = "Enter your risk parameters, or upload a TradingView screenshot. Get precise position sizing in real time - no signup required."
+} = Astro.props;
+---
+
+<section class="relative overflow-hidden bg-canvas pt-32 pb-20 md:pt-40 md:pb-28">
+  <!-- Mesh gradient backdrop -->
+  <div class="mesh-gradient absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+
+  <div class="relative max-w-[1400px] mx-auto px-4 md:px-6 text-center">
+    <!-- Mono eyebrow badge -->
+    <div class="inline-flex items-center gap-2 rounded-full bg-canvas-soft-2 px-3 py-1 mb-6">
+      <span class="font-mono text-xs text-mute uppercase tracking-wider">
+        {eyebrow}
+      </span>
+    </div>
+
+    <!-- Headline - display-xl: 48px/600/-2.4px tracking -->
+    <h1 class="text-4xl md:text-5xl font-semibold tracking-[-0.04em] text-ink leading-[1] max-w-3xl mx-auto" set:html={title} />
+
+    <!-- Body lead - body-lg: 18px/400 -->
+    <p class="mt-5 text-lg text-body leading-7 max-w-2xl mx-auto">
+      {description}
+    </p>
+
+    <!-- Scroll indicator -->
+    <div class="mt-10 flex justify-center" aria-hidden="true">
+      <svg class="w-5 h-5 text-mute animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
+    </div>
+  </div>
+</section>

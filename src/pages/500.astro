@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+interface Props {
+  error: unknown;
+}
+
+const { error } = Astro.props;
+---
+
+<Layout 
+  title="Server Error | fxlotsizecalculator.com"
+  description="An unexpected error occurred."
+>
+  <main class="min-h-[60vh] flex items-center justify-center px-6">
+    <div class="text-center">
+      <h1 class="text-9xl font-bold text-red-500 mb-4">500</h1>
+      <h2 class="text-3xl font-semibold text-ink mb-6">Internal Server Error</h2>
+      <p class="text-body text-lg mb-8 max-w-md mx-auto">
+        Oops! Something went wrong on our end. Please try again later.
+      </p>
+      <a 
+        href="/" 
+        class="inline-block bg-primary hover:bg-primary-dark text-white px-8 py-3 rounded-lg font-medium transition-colors"
+      >
+        Go Back Home
+      </a>
+    </div>
+  </main>
+</Layout>

@@ -1,23 +1,88 @@
+---
+import '../styles/app.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  ogImage?: string;
+}
+
+const {
+  title = 'Lot Size Calculator | Forex, Gold, Crypto & Futures',
+  description = 'Free lot size calculator for Forex, MT5, Futures, Gold, US30, NAS100 & Bitcoin. Calculate your trading position size accurately for better risk management.',
+  keywords = 'lot size calculator, position size calculator, forex lot size calculator, lot size calculator forex, gold lot size calculator, lot size calculator mt5, futures lot size calculator, us30 lot size calculator, lot size calculator futures, nas100 lot size calculator, mt5 lot size calculator, bitcoin lot size calculator, forex lot size calculator mt5, metatrader lot size calculator, trading lot size calculator',
+  ogImage = '/og-image.png'
+} = Astro.props;
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="FxLotSizeCalculator" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(ogImage, Astro.url)} />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(ogImage, Astro.url)} />
+    
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site || Astro.url).toString()} />
+    
+    <!-- Prevent dark mode FOUC -->
+    <script is:inline>
+      if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "url": Astro.site ? Astro.site.toString() : Astro.url.origin,
+          "name": "Fx Lot Size Calculator",
+          "description": description
+        },
+        {
+          "@type": "SoftwareApplication",
+          "name": title.split('|')[0].trim(),
+          "operatingSystem": "All",
+          "applicationCategory": "FinanceApplication",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          "description": description
+        }
+      ]
+    })} />
+  </head>
+  <body class="bg-canvas-soft text-ink antialiased min-h-screen flex flex-col font-sans">
+    <slot />
+  </body>
+</html>
