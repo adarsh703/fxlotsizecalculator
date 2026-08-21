@@ -17,6 +17,7 @@ const tm = useMetaTranslations(lang);
   title={tm("crypto.title")}
   description={tm("crypto.desc")}
   keywords="bitcoin lot size calculator, crypto lot size calculator, crypto position size calculator, btc lot size calculator"
+  canonicalUrl={Astro.url.origin + (lang === 'en' ? '/' : `/${lang}/`)}
   ogImage="/og-crypto.png"
 >
     <main>
