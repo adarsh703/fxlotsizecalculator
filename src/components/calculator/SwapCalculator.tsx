@@ -9,7 +9,10 @@ export function SwapCalculator({ initialInstrument = '' }: { initialInstrument?:
   const [accountCurrency, setAccountCurrency] = useState('USD');
   const [instrument, setInstrument] = useState(initialInstrument);
   const [lotSize, setLotSize] = useState('1');
-  const [direction, setDirection] = useState<TradeDirection>('long');
+  
+  const [direction, setDirection] = useState<'long' | 'short'>('long');
+  const [rates, setRates] = useState<Record<string, number>>({});
+
   const [swapLong, setSwapLong] = useState('-5.2');
   const [swapShort, setSwapShort] = useState('1.5');
   const [nights, setNights] = useState('1');
@@ -38,10 +41,17 @@ export function SwapCalculator({ initialInstrument = '' }: { initialInstrument?:
     // Standard swap formula based on pip value
     // Swap = (Lots * Swap Rate * Pip Value / 10) * Nights
     // Note: This assumes swap rate is provided in standard broker points.
-    const pointValue = inst.pipValuePerLot / 10;
+    
+    const rateQuote = rates[inst.quoteCurrency] || 1;
+    const rateAccount = rates[accountCurrency] || 1;
+    const pipValueInAccountCurrency = (inst.pipSize * inst.contractSize) * (rateAccount / rateQuote);
+    
+    // Most brokers quote swap in points (1/10th of a pip)
+    const pointValue = pipValueInAccountCurrency / 10;
+
     const fee = lots * swapRate * pointValue * numNights;
     return fee;
-  }, [instrument, lotSize, direction, swapLong, swapShort, nights]);
+  }, [instrument, lotSize, direction, swapLong, swapShort, nights, rates, accountCurrency]);
 
   return (
     <section id="swap-calculator" className="-mt-8 relative z-10">

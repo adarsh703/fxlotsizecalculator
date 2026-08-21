@@ -4,7 +4,7 @@ export interface Instrument {
   category: InstrumentCategory;
   pipSize: number;
   /** Pip value per standard lot in USD (approximate for cross pairs) */
-  pipValuePerLot: number;
+  quoteCurrency: string;
   contractSize: number;
 }
 

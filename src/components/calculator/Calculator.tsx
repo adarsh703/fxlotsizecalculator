@@ -27,7 +27,10 @@ export function Calculator({ initialInstrument = '', lang = 'en' }: { initialIns
   const [slPrice, setSlPrice] = useState('');
   const [tpPips, setTpPips] = useState('');
   const [tpPrice, setTpPrice] = useState('');
+  
   const [direction, setDirection] = useState<TradeDirection>('long');
+  const [rates, setRates] = useState<Record<string, number>>({});
+
   const [showScreenshotUpload, setShowScreenshotUpload] = useState(false);
   const [showSavedMsg, setShowSavedMsg] = useState(false);
 
@@ -107,16 +110,24 @@ export function Calculator({ initialInstrument = '', lang = 'en' }: { initialIns
       }
     }
 
+    
+    const rateQuote = rates[inst.quoteCurrency] || 1;
+    const rateAccount = rates[accountCurrency] || 1;
+    // Base pip value in Quote Currency = pipSize * contractSize
+    // Converted to Account Currency = (Base Pip Value / rateQuote) * rateAccount
+    const pipValueInAccountCurrency = (inst.pipSize * inst.contractSize) * (rateAccount / rateQuote);
+
     return calculateLotSize({
       accountBalance: balance,
       riskMode,
       riskPercentage: parseFloat(riskPercentage) || 0,
       riskAmount: parseFloat(riskAmount) || 0,
       slPips: slPipsValue,
-      pipValuePerLot: inst.pipValuePerLot,
+      pipValuePerLot: pipValueInAccountCurrency,
       tpPips: tpPipsValue,
     });
-  }, [accountBalance, riskMode, riskPercentage, riskAmount, instrument, slMode, slPips, entryPrice, slPrice, tpPips, tpPrice]);
+
+  }, [accountBalance, accountCurrency, riskMode, riskPercentage, riskAmount, instrument, slMode, slPips, entryPrice, slPrice, tpPips, tpPrice, rates]);
 
   // ─── Screenshot extraction handler ───
   const handleScreenshotExtracted = (data: ExtractedTradeData) => {
