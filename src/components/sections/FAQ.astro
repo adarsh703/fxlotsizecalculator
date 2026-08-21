@@ -4,63 +4,26 @@
  * Helps with SEO and user education. Uses structured data-friendly format.
  */
 
+import { getLangFromUrl } from '../../i18n/utils';
+import { faqDict, useFAQTranslations } from '../../i18n/ui-faq';
+const lang = getLangFromUrl(Astro.url);
+const t = useFAQTranslations(lang);
+
 const faqs = [
-  {
-    q: "How to use lot size calculator?",
-    a: "To use a lot size calculator, enter your total account balance, the percentage of that balance you are willing to risk (typically 1-2%), and your stop loss in pips or exact price levels. The calculator will automatically output the exact lot size you need to execute your trade safely."
-  },
-  {
-    q: "What is lot size calculator?",
-    a: "A lot size calculator is an essential risk management tool for traders. It automatically computes the exact number of units or lots you should buy or sell based on your account size, risk tolerance, and stop-loss distance, ensuring you never risk more than you intend to."
-  },
-  {
-    q: "How to calculate position size?",
-    a: "Position size is calculated using the formula: <strong>Position Size = Risk Amount / (Stop Loss in Pips x Pip Value)</strong>. You first determine your risk amount (e.g., 1% of your account balance), calculate the distance to your stop loss, and divide the risk by the total value of those pips."
-  },
-  {
-    q: "What does 0.01 lot size mean?",
-    a: "A 0.01 lot size is known as a <strong>micro lot</strong>. In forex trading, a standard lot is 100,000 units of currency, so a 0.01 lot represents 1,000 units. For most pairs where USD is the quote currency, a 1 pip movement on a 0.01 lot size equals $0.10 (10 cents)."
-  },
-  {
-    q: "What should my position size be?",
-    a: "Your position size should always be dictated by your strict risk parameters. Most professional traders recommend risking no more than 1% to 2% of your total account capital on a single trade. By entering your stop loss and this risk percentage into our calculator, you will find your ideal position size."
-  },
-  {
-    q: "How to use position sizing tool?",
-    a: "Using our position sizing tool is simple: select your trading instrument (Forex, Gold, Crypto), input your account balance, define your maximum risk (either in percentage or a fixed dollar amount), and enter your stop loss distance. The tool will instantly provide the exact trade volume to enter on your platform."
-  },
-  {
-    q: "How much is 0.1 lot in gold?",
-    a: "In gold trading (XAUUSD), a standard lot is typically 100 ounces. Therefore, a 0.1 lot size (a mini lot) represents 10 ounces of gold. With a 0.1 lot size, a standard $1.00 price movement in the price of gold is equivalent to a $10 profit or loss."
-  },
-  {
-    q: "What is a 0.2 lot size?",
-    a: "A 0.2 lot size equates to two mini lots, or 20,000 units of currency in forex. For a standard USD-quoted pair like EURUSD, a 1-pip movement on a 0.2 lot size equals $2.00."
-  },
-  {
-    q: "What is a standard lot?",
-    a: "A standard lot is the standard unit of measurement for trade volume. In forex, a standard lot is 100,000 units of the base currency. In gold (XAUUSD), it is typically 100 ounces. In indices like the US30, it represents 1 contract."
-  },
-  {
-    q: "How to calculate risk per trade?",
-    a: "To calculate your risk per trade, multiply your total account balance by your desired risk percentage. For example, if you have a $5,000 account and want to risk 2%, your risk per trade is $5,000 x 0.02 = $100."
-  },
-  {
-    q: "What is 1% risk per trade?",
-    a: "A 1% risk per trade means you are willing to lose exactly 1% of your total trading capital if your trade hits its stop loss. It is widely considered the golden rule of risk management because it requires 100 consecutive losses to blow an account, protecting you from market volatility."
-  },
-  {
-    q: "Is 3% risk per trade good?",
-    a: "Risking 3% per trade is generally considered aggressive. While it can lead to faster account growth during winning streaks, it also exposes you to significant drawdowns. Just 10 consecutive losses at a 3% risk will deplete roughly 26% of your total account balance. Beginners are advised to stick to 1%."
-  },
-  {
-    q: "What is a good lot size for day trading?",
-    a: "There is no single 'good' lot size for day trading; it entirely depends on your account balance and stop-loss distance. Day traders often use tighter stop losses, which allows them to trade larger lot sizes while still risking only 1% to 2% of their total capital."
-  },
-  {
-    q: "How much is 1 pip in 1 lot?",
-    a: "For currency pairs where the US Dollar is the quote (second) currency (such as EUR/USD, GBP/USD, or AUD/USD), 1 pip on 1 standard lot (100,000 units) is exactly $10.00."
-  }
+  { q: t('faq.q1'), a: t('faq.a1') },
+  { q: t('faq.q2'), a: t('faq.a2') },
+  { q: t('faq.q3'), a: t('faq.a3') },
+  { q: t('faq.q4'), a: t('faq.a4') },
+  { q: t('faq.q5'), a: t('faq.a5') },
+  { q: t('faq.q6'), a: t('faq.a6') },
+  { q: t('faq.q7'), a: t('faq.a7') },
+  { q: t('faq.q8'), a: t('faq.a8') },
+  { q: t('faq.q9'), a: t('faq.a9') },
+  { q: t('faq.q10'), a: t('faq.a10') },
+  { q: t('faq.q11'), a: t('faq.a11') },
+  { q: t('faq.q12'), a: t('faq.a12') },
+  { q: t('faq.q13'), a: t('faq.a13') },
+  { q: t('faq.q14'), a: t('faq.a14') },
 ];
 
 const schema = {
@@ -78,21 +41,16 @@ const schema = {
 ---
 
 <section class="bg-canvas-soft py-24 md:py-32" id="faq">
-  <!-- Inject JSON-LD Schema for SEO -->
   <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 
   <div class="max-w-3xl mx-auto px-4 md:px-6">
-    <!-- Section header -->
     <div class="text-center mb-16">
-      <span class="font-mono text-xs text-mute uppercase tracking-wider">
-        FAQ
-      </span>
+      <span class="font-mono text-xs text-mute uppercase tracking-wider">FAQ</span>
       <h2 class="mt-3 text-2xl md:text-3xl font-semibold tracking-[-0.03em] text-ink">
-        Frequently asked questions.
+        {t('faq.title')}
       </h2>
     </div>
 
-    <!-- FAQ items -->
     <div class="space-y-4">
       {faqs.map((faq) => (
         <details class="group bg-canvas rounded-lg shadow-card">

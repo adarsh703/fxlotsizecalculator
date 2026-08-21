@@ -1,0 +1,36 @@
+---
+import { getLangFromUrl, useMetaTranslations } from '../../i18n/utils';
+
+import Layout from '../../layouts/Layout.astro';
+const lang = getLangFromUrl(Astro.url);
+const tm = useMetaTranslations(lang);
+
+---
+
+<Layout 
+  title="Privacy Policy | fxlotsizecalculator.com"
+  description="Privacy policy and data handling practices for fxlotsizecalculator.com"
+>
+  <main class="max-w-3xl mx-auto px-6 py-24">
+    <h1 class="text-3xl font-bold text-ink mb-8">Privacy Policy</h1>
+    
+    <div class="prose prose-slate dark:prose-invert max-w-none space-y-6 text-body">
+      <p>Last updated: August 2026</p>
+      
+      <h2 class="text-xl font-semibold text-ink mt-8">1. Information We Collect</h2>
+      <p>At fxlotsizecalculator.com, we prioritize your privacy. We do not collect personal identifiable information. The calculations you perform are processed entirely in your local browser.</p>
+
+      <h2 class="text-xl font-semibold text-ink mt-8">2. Local Storage</h2>
+      <p>We use your browser's LocalStorage to save your calculator preferences (such as your account balance, risk percentage, and preferred trading instrument) so you don't have to re-enter them every time you visit. This data never leaves your device and is never sent to our servers.</p>
+
+      <h2 class="text-xl font-semibold text-ink mt-8">3. Cookies & Analytics</h2>
+      <p>We may use standard analytics tools to measure website traffic and usage patterns. This data is aggregated and anonymous, helping us improve the user experience and tool performance.</p>
+
+      <h2 class="text-xl font-semibold text-ink mt-8">4. Changes to This Policy</h2>
+      <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.</p>
+
+      <h2 class="text-xl font-semibold text-ink mt-8">5. Contact Us</h2>
+      <p>If you have any questions about this Privacy Policy, please contact us via our Contact page.</p>
+    </div>
+  </main>
+</Layout>

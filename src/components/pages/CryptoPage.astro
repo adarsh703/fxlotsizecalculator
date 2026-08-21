@@ -1,0 +1,38 @@
+---
+import { getLangFromUrl, useMetaTranslations } from '../../i18n/utils';
+
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../layout/Navbar.astro';
+import Hero from '../sections/Hero.astro';
+import Features from '../sections/Features.astro';
+import ProTeaser from '../sections/ProTeaser.astro';
+import HowItWorks from '../sections/HowItWorks.astro';
+import FAQ from '../sections/FAQ.astro';
+import Footer from '../layout/Footer.astro';
+import { Calculator } from '../calculator/Calculator';
+const lang = getLangFromUrl(Astro.url);
+const tm = useMetaTranslations(lang);
+
+---
+
+<Layout
+  title={tm("crypto.title")}
+  description={tm("crypto.desc")}
+  keywords="bitcoin lot size calculator, crypto lot size calculator, crypto position size calculator, btc lot size calculator"
+  ogImage="/og-crypto.png"
+>
+  <Navbar />
+  <main>
+    <Hero 
+      eyebrow="Bitcoin & Crypto Position Sizing"
+      title="Calculate your <span class='text-orange-500'>Crypto</span> lot size. Instantly."
+      description="Navigate volatile cryptocurrency markets safely. Get exact position sizing for BTC, ETH and more."
+    />
+    <Calculator lang={lang} client:load initialInstrument="BTCUSD" />
+    <ProTeaser />
+    <Features />
+    <HowItWorks />
+    <FAQ />
+  </main>
+  <Footer />
+</Layout>

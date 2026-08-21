@@ -1,26 +1,4 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/layout/Navbar.astro';
-import Hero from '../components/sections/Hero.astro';
-import Features from '../components/sections/Features.astro';
-import Footer from '../components/layout/Footer.astro';
-import { SwapCalculator } from '../components/calculator/SwapCalculator';
+import SwapPage from '../components/pages/SwapPage.astro';
 ---
-
-<Layout
-  title="Forex Swap Calculator | Rollover Fees"
-  description="Calculate your overnight swap fees and rollover costs for Forex, Crypto, Indices, and Commodities."
-  keywords="swap calculator, forex swap calculator, rollover calculator, forex rollover fees, swap fee calculator"
->
-  <Navbar />
-  <main>
-    <Hero 
-      eyebrow="Swap & Rollover Calculator"
-      title="Calculate your <span class='text-orange-500'>Swap Fees</span>"
-      description="Estimate the overnight rollover fees charged or credited by your broker for holding positions overnight."
-    />
-    <SwapCalculator client:load />
-    <Features />
-  </main>
-  <Footer />
-</Layout>
+<SwapPage />

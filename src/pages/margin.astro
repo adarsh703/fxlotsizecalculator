@@ -1,26 +1,4 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/layout/Navbar.astro';
-import Hero from '../components/sections/Hero.astro';
-import Features from '../components/sections/Features.astro';
-import Footer from '../components/layout/Footer.astro';
-import { MarginCalculator } from '../components/calculator/MarginCalculator';
+import MarginPage from '../components/pages/MarginPage.astro';
 ---
-
-<Layout
-  title="Forex & Crypto Margin Calculator"
-  description="Calculate your required margin for Forex, Crypto, Indices, and Commodities. Know exactly how much capital you need to open a position based on your leverage."
-  keywords="margin calculator, forex margin calculator, crypto margin calculator, calculate margin leverage"
->
-  <Navbar />
-  <main>
-    <Hero 
-      eyebrow="Margin Calculator"
-      title="Calculate your <span class='text-teal-500'>Required Margin</span>"
-      description="Know exactly how much capital is required to open a trade based on your broker's leverage."
-    />
-    <MarginCalculator client:load />
-    <Features />
-  </main>
-  <Footer />
-</Layout>
+<MarginPage />

@@ -1,0 +1,31 @@
+---
+import { getLangFromUrl, useMetaTranslations } from '../../i18n/utils';
+
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../layout/Navbar.astro';
+import Hero from '../sections/Hero.astro';
+import Features from '../sections/Features.astro';
+import Footer from '../layout/Footer.astro';
+import { SwapCalculator } from '../calculator/SwapCalculator';
+const lang = getLangFromUrl(Astro.url);
+const tm = useMetaTranslations(lang);
+
+---
+
+<Layout
+  title="Forex Swap Calculator | Rollover Fees"
+  description="Calculate your overnight swap fees and rollover costs for Forex, Crypto, Indices, and Commodities."
+  keywords="swap calculator, forex swap calculator, rollover calculator, forex rollover fees, swap fee calculator"
+>
+  <Navbar />
+  <main>
+    <Hero 
+      eyebrow="Swap & Rollover Calculator"
+      title="Calculate your <span class='text-orange-500'>Swap Fees</span>"
+      description="Estimate the overnight rollover fees charged or credited by your broker for holding positions overnight."
+    />
+    <SwapCalculator client:load />
+    <Features />
+  </main>
+  <Footer />
+</Layout>

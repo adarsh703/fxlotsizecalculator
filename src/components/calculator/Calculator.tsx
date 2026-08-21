@@ -10,7 +10,11 @@ import { Button } from '../ui/Button';
 import { ResultsPanel } from './ResultsPanel';
 import { ScreenshotUpload } from './ScreenshotUpload';
 
-export function Calculator({ initialInstrument = '' }: { initialInstrument?: string }) {
+import { useCalcTranslations } from '../../i18n/utils';
+import type { defaultLang, ui } from '../../i18n/ui';
+
+export function Calculator({ initialInstrument = '', lang = 'en' }: { initialInstrument?: string, lang?: keyof typeof ui }) {
+  const t = useCalcTranslations(lang);
   const [accountBalance, setAccountBalance] = useState('');
   const [accountCurrency, setAccountCurrency] = useState<AccountCurrency>('USD');
   const [riskMode, setRiskMode] = useState<RiskMode>('percentage');
@@ -146,7 +150,7 @@ export function Calculator({ initialInstrument = '' }: { initialInstrument?: str
                 <div className="grid grid-cols-3 gap-4">
                   <div className="col-span-2">
                     <Input
-                      label="Account Balance"
+                      label={t("calc.accBalance")}
                       type="text"
                       inputMode="decimal"
                       placeholder="10000"
@@ -156,7 +160,7 @@ export function Calculator({ initialInstrument = '' }: { initialInstrument?: str
                     />
                   </div>
                   <Select
-                    label="Currency"
+                    label={t("calc.currency")}
                     options={currencyOptions}
                     value={accountCurrency}
                     onChange={(v) => setAccountCurrency(v as AccountCurrency)}
@@ -174,7 +178,7 @@ export function Calculator({ initialInstrument = '' }: { initialInstrument?: str
                   />
                   {riskMode === 'percentage' ? (
                     <Input
-                      label="Risk Percentage"
+                      label={t("calc.riskPct")}
                       type="text"
                       inputMode="decimal"
                       suffix="%"
@@ -185,7 +189,7 @@ export function Calculator({ initialInstrument = '' }: { initialInstrument?: str
                     />
                   ) : (
                     <Input
-                      label="Risk Amount"
+                      label={t("calc.riskAmt")}
                       type="text"
                       inputMode="decimal"
                       suffix={accountCurrency}
@@ -199,7 +203,7 @@ export function Calculator({ initialInstrument = '' }: { initialInstrument?: str
 
                 {/* Row 3: Instrument Select */}
                 <Select
-                  label="Instrument"
+                  label={t("calc.instrument")}
                   options={instrumentOptions}
                   value={instrument}
                   onChange={setInstrument}
@@ -210,13 +214,13 @@ export function Calculator({ initialInstrument = '' }: { initialInstrument?: str
                 {/* Row 4: Direction Toggle */}
                 <div className="space-y-3">
                   <Toggle
-                    options={['Long', 'Short']}
-                    value={direction === 'long' ? 'Long' : 'Short'}
-                    onChange={(v) => setDirection(v === 'Long' ? 'long' : 'short')}
+                    options={[t('calc.long'), t('calc.short')]}
+                    value={direction === 'long' ? t('calc.long') : t('calc.short')}
+                    onChange={(v) => setDirection(v === t('calc.long') ? 'long' : 'short')}
                     size="sm"
                     activeClassMap={{
-                      'Long': 'bg-green-500 text-white shadow-sm',
-                      'Short': 'bg-red-500 text-white shadow-sm'
+                      [t('calc.long')]: 'bg-green-500 text-white shadow-sm',
+                      [t('calc.short')]: 'bg-red-500 text-white shadow-sm'
                     }}
                   />
                 </div>
@@ -225,7 +229,7 @@ export function Calculator({ initialInstrument = '' }: { initialInstrument?: str
                 <div className="space-y-3">
                   {slMode === 'pips' ? (
                     <Input
-                      label="Stop Loss Distance"
+                      label={t("calc.slDist")}
                       type="text"
                       inputMode="decimal"
                       placeholder="50"
@@ -236,7 +240,7 @@ export function Calculator({ initialInstrument = '' }: { initialInstrument?: str
                   ) : (
                     <div className="grid grid-cols-2 gap-4">
                       <Input
-                        label="Entry Price"
+                        label={t("calc.entryPrice")}
                         type="text"
                         inputMode="decimal"
                         placeholder="1.08500"
@@ -244,7 +248,7 @@ export function Calculator({ initialInstrument = '' }: { initialInstrument?: str
                         onChange={(e) => setEntryPrice(e.target.value)}
                       />
                       <Input
-                        label="Stop Loss Price"
+                        label={t("calc.slPrice")}
                         type="text"
                         inputMode="decimal"
                         placeholder="1.08000"
@@ -254,13 +258,13 @@ export function Calculator({ initialInstrument = '' }: { initialInstrument?: str
                     </div>
                   )}
                   <Toggle
-                    options={['Pips', 'Price']}
-                    value={slMode === 'pips' ? 'Pips' : 'Price'}
-                    onChange={(v) => setSlMode(v === 'Pips' ? 'pips' : 'price')}
+                    options={[t('calc.pips'), t('calc.price')]}
+                    value={slMode === 'pips' ? t('calc.pips') : t('calc.price')}
+                    onChange={(v) => setSlMode(v === t('calc.pips') ? 'pips' : 'price')}
                     size="sm"
                     activeClassMap={{
-                      'Pips': 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-sm',
-                      'Price': 'bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white shadow-sm'
+                      [t('calc.pips')]: 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-sm',
+                      [t('calc.price')]: 'bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white shadow-sm'
                     }}
                   />
                 </div>
@@ -268,7 +272,7 @@ export function Calculator({ initialInstrument = '' }: { initialInstrument?: str
                 {/* Row 6: Take Profit */}
                 {slMode === 'pips' ? (
                   <Input
-                    label="Take Profit Distance"
+                    label={t("calc.tpDist")}
                     type="text"
                     inputMode="decimal"
                     placeholder="Optional (e.g. 100)"
@@ -279,10 +283,10 @@ export function Calculator({ initialInstrument = '' }: { initialInstrument?: str
                   />
                 ) : (
                   <Input
-                    label="Take Profit Price"
+                    label={t("calc.tpPrice")}
                     type="text"
                     inputMode="decimal"
-                    placeholder="Optional"
+                    placeholder={t('calc.optional')}
                     hint="Optional - used for Risk:Reward ratio calculation"
                     value={tpPrice}
                     onChange={(e) => setTpPrice(e.target.value)}
@@ -303,6 +307,7 @@ export function Calculator({ initialInstrument = '' }: { initialInstrument?: str
                   tpPrice={tpPrice}
                   riskMode={riskMode}
                   riskPercentage={riskPercentage}
+                  lang={lang}
                 />
               </div>
 
@@ -319,10 +324,10 @@ export function Calculator({ initialInstrument = '' }: { initialInstrument?: str
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
                       </svg>
-                      Upload TV Screenshot
+                      {t('calc.uploadBtn')}
                     </div>
                     <p className="mt-2 text-xs text-mute leading-relaxed">
-                      Double-click TV long/short tool for settings box.
+                      {t('calc.uploadHint')}
                     </p>
                   </button>
                   
@@ -335,10 +340,10 @@ export function Calculator({ initialInstrument = '' }: { initialInstrument?: str
                       <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
                       </svg>
-                      {showSavedMsg ? 'Template Saved!' : 'Save as Template'}
+                      {showSavedMsg ? t('calc.saved') : t('calc.saveBtn')}
                     </div>
                     <p className="mt-2 text-xs text-mute leading-relaxed">
-                      Save current inputs to auto-load on next visit.
+                      {t('calc.saveHint')}
                     </p>
                   </button>
                 </div>

@@ -8,8 +8,10 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "deploy": "npm run build && wrangler deploy",
+    "preview": "npm run build && wrangler dev",
+    "astro": "astro",
+    "generate-types": "wrangler types"
   },
   "dependencies": {
     "@astrojs/react": "^6.0.3",
@@ -28,6 +30,7 @@
     "tesseract.js": "^7.0.0"
   },
   "devDependencies": {
-    "@types/canvas-confetti": "^1.9.0"
+    "@types/canvas-confetti": "^1.9.0",
+    "wrangler": "^4.125.0"
   }
 }

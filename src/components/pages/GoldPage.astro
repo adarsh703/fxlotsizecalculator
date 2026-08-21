@@ -1,0 +1,38 @@
+---
+import { getLangFromUrl, useMetaTranslations } from '../../i18n/utils';
+
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../layout/Navbar.astro';
+import Hero from '../sections/Hero.astro';
+import Features from '../sections/Features.astro';
+import ProTeaser from '../sections/ProTeaser.astro';
+import HowItWorks from '../sections/HowItWorks.astro';
+import FAQ from '../sections/FAQ.astro';
+import Footer from '../layout/Footer.astro';
+import { Calculator } from '../calculator/Calculator';
+const lang = getLangFromUrl(Astro.url);
+const tm = useMetaTranslations(lang);
+
+---
+
+<Layout
+  title="Gold Lot Size Calculator | XAUUSD Position Sizing"
+  description="Calculate your Gold (XAUUSD) lot size and position size accurately. Manage risk for commodities with our free gold lot size calculator."
+  keywords="gold lot size calculator, xauusd lot size calculator, gold position size calculator, lot size calculator gold"
+  ogImage="/og-gold.png"
+>
+  <Navbar />
+  <main>
+    <Hero 
+      eyebrow="XAUUSD Position Calculator"
+      title="Calculate your <span class='text-yellow-500'>Gold</span> lot size. Instantly."
+      description="Determine the perfect position size for trading Gold. Manage your risk effectively with real-time XAUUSD calculations."
+    />
+    <Calculator lang={lang} client:load initialInstrument="XAUUSD" />
+    <ProTeaser />
+    <Features />
+    <HowItWorks />
+    <FAQ />
+  </main>
+  <Footer />
+</Layout>

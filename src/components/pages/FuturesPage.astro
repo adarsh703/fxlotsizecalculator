@@ -1,0 +1,38 @@
+---
+import { getLangFromUrl, useMetaTranslations } from '../../i18n/utils';
+
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../layout/Navbar.astro';
+import Hero from '../sections/Hero.astro';
+import Features from '../sections/Features.astro';
+import ProTeaser from '../sections/ProTeaser.astro';
+import HowItWorks from '../sections/HowItWorks.astro';
+import FAQ from '../sections/FAQ.astro';
+import Footer from '../layout/Footer.astro';
+import { Calculator } from '../calculator/Calculator';
+const lang = getLangFromUrl(Astro.url);
+const tm = useMetaTranslations(lang);
+
+---
+
+<Layout
+  title="Futures Lot Size Calculator | Oil, VIX, NQ, ES"
+  description="Determine the perfect position size for trading Futures contracts. Use our free lot size calculator for VIX, Crude Oil, and other major futures."
+  keywords="futures lot size calculator, oil lot size calculator, vix lot size calculator, futures margin calculator, position size calculator futures"
+  ogImage="/og-futures.png"
+>
+  <Navbar />
+  <main>
+    <Hero 
+      eyebrow="Futures Lot Size Calculator"
+      title="Calculate your <span class='text-blue-500'>Futures</span> lot size. Instantly."
+      description="Calculate exact position sizes for Oil, VIX, NQ, ES and other futures contracts. Stop guessing your risk."
+    />
+    <Calculator lang={lang} client:load initialInstrument="VIX" />
+    <ProTeaser />
+    <Features />
+    <HowItWorks />
+    <FAQ />
+  </main>
+  <Footer />
+</Layout>

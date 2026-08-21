@@ -1,0 +1,39 @@
+---
+import { languages } from '../../i18n/ui';
+import { getLangFromUrl } from '../../i18n/utils';
+
+const currentLang = getLangFromUrl(Astro.url);
+// Remove the language prefix from the current path to get the base path
+const pathname = Astro.url.pathname;
+const basePath = currentLang === 'en' ? pathname : pathname.replace(`/${currentLang}`, '') || '/';
+---
+
+<div class="relative group">
+  <button class="flex items-center gap-1 text-sm font-medium text-body hover:text-ink transition-colors px-2 py-1 rounded-md hover:bg-canvas-soft">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+    </svg>
+    <span class="uppercase">{currentLang}</span>
+    <svg class="w-3 h-3 opacity-50 group-hover:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+
+  <div class="absolute right-0 mt-2 w-40 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+    <div class="bg-canvas border border-hairline rounded-lg shadow-xl py-2 flex flex-col">
+      {Object.entries(languages).map(([lang, label]) => {
+        // Construct the correct URL for each language
+        const targetUrl = lang === 'en' ? basePath : `/${lang}${basePath === '/' ? '' : basePath}`;
+        
+        return (
+          <a
+            href={targetUrl}
+            class={`px-4 py-2 text-sm text-left hover:bg-canvas-soft transition-colors ${currentLang === lang ? 'text-link font-semibold bg-canvas-soft-2' : 'text-body hover:text-ink'}`}
+          >
+            {label}
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</div>

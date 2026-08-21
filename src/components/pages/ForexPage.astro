@@ -1,0 +1,38 @@
+---
+import { getLangFromUrl, useMetaTranslations } from '../../i18n/utils';
+
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../layout/Navbar.astro';
+import Hero from '../sections/Hero.astro';
+import Features from '../sections/Features.astro';
+import ProTeaser from '../sections/ProTeaser.astro';
+import HowItWorks from '../sections/HowItWorks.astro';
+import FAQ from '../sections/FAQ.astro';
+import Footer from '../layout/Footer.astro';
+import { Calculator } from '../calculator/Calculator';
+const lang = getLangFromUrl(Astro.url);
+const tm = useMetaTranslations(lang);
+
+---
+
+<Layout
+  title={tm("forex.title")}
+  description={tm("forex.desc")}
+  keywords="forex lot size calculator, lot size calculator forex, lot size calculator mt5, forex lot size calculator mt5, metatrader lot size calculator, mt4 lot size calculator"
+  ogImage="/og-forex.png"
+>
+  <Navbar />
+  <main>
+    <Hero 
+      eyebrow="MT4 & MT5 Lot Size Calculator"
+      title="Calculate your <span class='text-blue-500'>Forex</span> lot size. Instantly."
+      description="Enter your risk parameters or upload a chart. Get exact forex position sizing in real time."
+    />
+    <Calculator lang={lang} client:load initialInstrument="EURUSD" />
+    <ProTeaser />
+    <Features />
+    <HowItWorks />
+    <FAQ />
+  </main>
+  <Footer />
+</Layout>

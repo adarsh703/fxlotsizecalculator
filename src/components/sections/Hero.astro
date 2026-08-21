@@ -4,16 +4,17 @@
  * Vercel-inspired: mono eyebrow, tight-tracked headline, body lead.
  */
 
+import { getLangFromUrl, useHeroTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useHeroTranslations(lang);
+
 interface Props {
   eyebrow?: string;
-  title?: string;
-  description?: string;
 }
 
 const {
-  eyebrow = "Position Size Calculator",
-  title = "Calculate your forex lot size. Instantly.",
-  description = "Enter your risk parameters, or upload a TradingView screenshot. Get precise position sizing in real time - no signup required."
+  eyebrow = "Lot Size Calculator"
 } = Astro.props;
 ---
 
@@ -30,11 +31,13 @@ const {
     </div>
 
     <!-- Headline - display-xl: 48px/600/-2.4px tracking -->
-    <h1 class="text-4xl md:text-5xl font-semibold tracking-[-0.04em] text-ink leading-[1] max-w-3xl mx-auto" set:html={title} />
+    <h1 class="text-4xl md:text-5xl font-semibold tracking-[-0.04em] text-ink leading-[1] max-w-3xl mx-auto">
+      {t('hero.title1')} <br class="hidden md:block" /> {t('hero.title2')}
+    </h1>
 
     <!-- Body lead - body-lg: 18px/400 -->
     <p class="mt-5 text-lg text-body leading-7 max-w-2xl mx-auto">
-      {description}
+      {t('hero.subtitle')}
     </p>
 
     <!-- Scroll indicator -->

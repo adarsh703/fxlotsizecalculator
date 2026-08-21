@@ -3,6 +3,8 @@ import type { CalculationResult, RiskMode, TradeDirection } from '../../lib/type
 import { formatNumber, generateTradeSummary } from '../../lib/calculator';
 import { getInstrument } from '../../data/instruments';
 import { Button } from '../ui/Button';
+import { useCalcTranslations } from '../../i18n/utils';
+import type { defaultLang, ui } from '../../i18n/ui';
 
 interface ResultsPanelProps {
   result: CalculationResult | null;
@@ -13,6 +15,7 @@ interface ResultsPanelProps {
   tpPrice: string;
   riskMode: RiskMode;
   riskPercentage: string;
+  lang?: keyof typeof ui;
 }
 
 function DetailRow({ label, value, highlight }: { label: string; value: string; highlight?: boolean }) {
@@ -25,7 +28,8 @@ function DetailRow({ label, value, highlight }: { label: string; value: string; 
 }
 
 export function ResultsPanel(props: ResultsPanelProps) {
-  const { result } = props;
+  const { result, lang = 'en' } = props;
+  const t = useCalcTranslations(lang);
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -61,7 +65,7 @@ export function ResultsPanel(props: ResultsPanelProps) {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
           </svg>
         </div>
-        <p className="text-mute text-sm">Enter your trade parameters<br/>to see position sizing results.</p>
+        <p className="text-mute text-sm">{t('calc.emptyTitle')}<br/>{t('calc.emptySub')}</p>
       </div>
     );
   }
@@ -69,18 +73,18 @@ export function ResultsPanel(props: ResultsPanelProps) {
   return (
     <div className="lg:sticky lg:top-24">
       {/* Eyebrow */}
-      <span className="font-mono text-xs uppercase tracking-wider text-mute">Recommended Trade Size</span>
+      <span className="font-mono text-xs uppercase tracking-wider text-mute">{t('calc.resultsTitle')}</span>
       
       {/* Big number */}
       <div className="mt-3 flex flex-col">
         <div className="flex items-baseline">
           <span className="text-5xl font-semibold tracking-[-0.04em] text-ink">{result.standardLots}</span>
           <span className="ml-2 text-base font-medium text-body">
-            {getInstrument(props.instrumentSymbol)?.category === 'futures' ? 'Contracts' : 'Lots'}
+            {getInstrument(props.instrumentSymbol)?.category === 'futures' ? t('calc.contracts') : t('calc.lots')}
           </span>
         </div>
         <p className="text-xs text-mute mt-2 max-w-[250px]">
-          Enter this exact number into MetaTrader, cTrader, or your broker's platform.
+          {t('calc.resultsHint')}
         </p>
       </div>
 
@@ -91,11 +95,11 @@ export function ResultsPanel(props: ResultsPanelProps) {
       <div className="space-y-3">
         {getInstrument(props.instrumentSymbol)?.category !== 'futures' && (
           <>
-            <DetailRow label="Mini Lots" value={formatNumber(result.miniLots, 2)} />
-            <DetailRow label="Micro Lots" value={formatNumber(result.microLots, 2)} />
+            <DetailRow label={t('calc.miniLots')} value={formatNumber(result.miniLots, 2)} />
+            <DetailRow label={t('calc.microLots')} value={formatNumber(result.microLots, 2)} />
           </>
         )}
-        <DetailRow label="Units" value={formatNumber(result.units, 0)} />
+        <DetailRow label={t('calc.units')} value={formatNumber(result.units, 0)} />
       </div>
 
       {/* Divider */}
@@ -103,10 +107,10 @@ export function ResultsPanel(props: ResultsPanelProps) {
 
       {/* Financial details */}
       <div className="space-y-3">
-        <DetailRow label="Pip Value" value={`$${formatNumber(result.pipValue, 2)}`} />
-        <DetailRow label="Risk Amount" value={`$${formatNumber(result.riskAmount, 2)}`} />
-        {result.rrRatio && <DetailRow label="Risk : Reward" value={`1 : ${result.rrRatio}`} highlight />}
-        <DetailRow label="SL Distance" value={`${formatNumber(result.slPips, 1)} pips`} />
+        <DetailRow label={t('calc.pipValue')} value={`$${formatNumber(result.pipValue, 2)}`} />
+        <DetailRow label={t('calc.riskAmt')} value={`$${formatNumber(result.riskAmount, 2)}`} />
+        {result.rrRatio && <DetailRow label={t('calc.rrRatio')} value={`1 : ${result.rrRatio}`} highlight />}
+        <DetailRow label={t('calc.slDist')} value={`${formatNumber(result.slPips, 1)} pips`} />
       </div>
 
       {/* Divider */}
@@ -114,7 +118,7 @@ export function ResultsPanel(props: ResultsPanelProps) {
 
       {/* Copy button */}
       <Button variant="primary" size="sm" onClick={handleCopy} className="w-full">
-        {copied ? 'Copied!' : 'Copy Trade Summary'}
+        {copied ? t('calc.copied') : t('calc.copyBtn')}
       </Button>
     </div>
   );

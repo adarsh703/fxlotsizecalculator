@@ -1,0 +1,33 @@
+---
+import { getLangFromUrl, useMetaTranslations } from '../../i18n/utils';
+
+import Layout from '../../layouts/Layout.astro';
+const lang = getLangFromUrl(Astro.url);
+const tm = useMetaTranslations(lang);
+
+---
+
+<Layout 
+  title="Terms & Conditions | fxlotsizecalculator.com"
+  description="Terms of service and usage conditions for fxlotsizecalculator.com"
+>
+  <main class="max-w-3xl mx-auto px-6 py-24">
+    <h1 class="text-3xl font-bold text-ink mb-8">Terms & Conditions</h1>
+    
+    <div class="prose prose-slate dark:prose-invert max-w-none space-y-6 text-body">
+      <p>Last updated: August 2026</p>
+      
+      <h2 class="text-xl font-semibold text-ink mt-8">1. Acceptance of Terms</h2>
+      <p>By accessing and using fxlotsizecalculator.com, you accept and agree to be bound by the terms and provision of this agreement.</p>
+
+      <h2 class="text-xl font-semibold text-ink mt-8">2. Educational Purposes Only</h2>
+      <p>All calculations, outputs, and information provided by fxlotsizecalculator.com are for educational and informational purposes only. The tool relies on approximate pip values for certain cross pairs and should not be considered financial advice.</p>
+
+      <h2 class="text-xl font-semibold text-ink mt-8">3. Limitation of Liability</h2>
+      <p>Trading foreign exchange, commodities, indices, and cryptocurrencies carries a high level of risk and may not be suitable for all investors. fxlotsizecalculator.com and its creators shall not be held liable for any financial losses or damages incurred from the use of this tool. Always double-check your position sizes within your broker's platform before executing trades.</p>
+
+      <h2 class="text-xl font-semibold text-ink mt-8">4. Tool Accuracy</h2>
+      <p>While we strive for perfect accuracy, market conditions, broker-specific contract sizes, and fluctuating exchange rates mean that calculator outputs are estimates. You are solely responsible for managing your own risk.</p>
+    </div>
+  </main>
+</Layout>

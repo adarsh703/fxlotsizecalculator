@@ -1,58 +1,63 @@
 ---
+import { getLangFromUrl, useTranslations, useFooterTranslations } from '../../i18n/utils';
+const lang = getLangFromUrl(Astro.url);
+const tn = useTranslations(lang);
+const t = useFooterTranslations(lang);
+const prefix = lang === 'en' ? '' : `/${lang}`;
 ---
 
 <footer class="bg-canvas border-t border-hairline py-16 px-6 mt-auto">
   <div class="max-w-[1400px] mx-auto">
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12">
       <div class="flex flex-col">
-        <a href="/" class="flex items-baseline mb-4">
+        <a href={`${prefix}/`} class="flex items-baseline mb-4">
           <span class="font-semibold text-ink tracking-tight text-lg">fxlotsizecalculator</span>
           <span class="text-mute text-sm ml-0.5">.com</span>
         </a>
         <p class="text-sm text-body">
-          Free forex lot size and position size calculator for traders.
+          {t('footer.desc')}
         </p>
       </div>
       
       <div class="flex flex-col">
-        <h3 class="font-mono text-xs uppercase tracking-wider text-mute mb-4">Calculator</h3>
+        <h3 class="font-mono text-xs uppercase tracking-wider text-mute mb-4">{t('footer.calc')}</h3>
         <ul class="flex flex-col gap-3">
-          <li><a href="/" class="text-sm text-body hover:text-ink transition-colors">Lot Size Calculator</a></li>
-          <li><a href="/#how-it-works" class="text-sm text-body hover:text-ink transition-colors">How It Works</a></li>
-          <li><a href="/#faq" class="text-sm text-body hover:text-ink transition-colors">FAQ</a></li>
+          <li><a href={`${prefix}/`} class="text-sm text-body hover:text-ink transition-colors">Lot Size Calculator</a></li>
+          <li><a href={`${prefix}/#how-it-works`} class="text-sm text-body hover:text-ink transition-colors">{tn('nav.howItWorks')}</a></li>
+          <li><a href={`${prefix}/#faq`} class="text-sm text-body hover:text-ink transition-colors">{tn('nav.faq')}</a></li>
         </ul>
       </div>
       
       <div class="flex flex-col">
-        <h3 class="font-mono text-xs uppercase tracking-wider text-mute mb-4">Resources</h3>
+        <h3 class="font-mono text-xs uppercase tracking-wider text-mute mb-4">{t('footer.resources')}</h3>
         <ul class="flex flex-col gap-3">
-          <li><a href="/forex" class="text-sm text-body hover:text-ink transition-colors">Forex Lot Size</a></li>
-          <li><a href="/gold" class="text-sm text-body hover:text-ink transition-colors">Gold Position Size</a></li>
-          <li><a href="/indices" class="text-sm text-body hover:text-ink transition-colors">Indices Calculator</a></li>
-          <li><a href="/crypto" class="text-sm text-body hover:text-ink transition-colors">Crypto Risk Tool</a></li>
-          <li><a href="/futures" class="text-sm text-body hover:text-ink transition-colors">Futures Calculator</a></li>
-          <li><a href="/margin" class="text-sm text-body hover:text-ink transition-colors">Margin Calculator</a></li>
-          <li><a href="/swap" class="text-sm text-body hover:text-ink transition-colors">Swap Calculator</a></li>
+          <li><a href={`${prefix}/forex`} class="text-sm text-body hover:text-ink transition-colors">{tn('nav.forex')}</a></li>
+          <li><a href={`${prefix}/gold`} class="text-sm text-body hover:text-ink transition-colors">{tn('nav.gold')}</a></li>
+          <li><a href={`${prefix}/indices`} class="text-sm text-body hover:text-ink transition-colors">{tn('nav.indices')}</a></li>
+          <li><a href={`${prefix}/crypto`} class="text-sm text-body hover:text-ink transition-colors">{tn('nav.crypto')}</a></li>
+          <li><a href={`${prefix}/futures`} class="text-sm text-body hover:text-ink transition-colors">{tn('nav.futures')}</a></li>
+          <li><a href={`${prefix}/margin`} class="text-sm text-body hover:text-ink transition-colors">{tn('nav.margin')}</a></li>
+          <li><a href={`${prefix}/swap`} class="text-sm text-body hover:text-ink transition-colors">{tn('nav.swap')}</a></li>
         </ul>
       </div>
 
       <div class="flex flex-col">
-        <h3 class="font-mono text-xs uppercase tracking-wider text-mute mb-4">Company</h3>
+        <h3 class="font-mono text-xs uppercase tracking-wider text-mute mb-4">{t('footer.company')}</h3>
         <ul class="flex flex-col gap-3">
-          <li><a href="/about" class="text-sm text-body hover:text-ink transition-colors">About Us</a></li>
-          <li><a href="/contact" class="text-sm text-body hover:text-ink transition-colors">Contact Us</a></li>
-          <li><a href="/privacy" class="text-sm text-body hover:text-ink transition-colors">Privacy Policy</a></li>
-          <li><a href="/terms" class="text-sm text-body hover:text-ink transition-colors">Terms & Conditions</a></li>
+          <li><a href={`${prefix}/about`} class="text-sm text-body hover:text-ink transition-colors">{t('footer.about')}</a></li>
+          <li><a href={`${prefix}/contact`} class="text-sm text-body hover:text-ink transition-colors">{t('footer.contact')}</a></li>
+          <li><a href={`${prefix}/privacy`} class="text-sm text-body hover:text-ink transition-colors">{t('footer.privacy')}</a></li>
+          <li><a href={`${prefix}/terms`} class="text-sm text-body hover:text-ink transition-colors">{t('footer.terms')}</a></li>
         </ul>
       </div>
     </div>
     
     <div class="border-t border-hairline mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-6">
       <p class="text-sm text-body">
-        &copy; 2026 fxlotsizecalculator.com. All rights reserved.
+        &copy; 2026 fxlotsizecalculator.com. {t('footer.rights')}
       </p>
       <p class="text-xs text-mute text-left md:text-right max-w-xl">
-        This calculator is for informational purposes only. Always verify calculations before placing trades.
+        {t('footer.disclaimer')}
       </p>
     </div>
   </div>

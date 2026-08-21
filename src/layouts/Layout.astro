@@ -8,16 +8,25 @@ interface Props {
   ogImage?: string;
 }
 
+import { getLangFromUrl } from '../i18n/utils';
+import { languages } from '../i18n/ui';
+const lang = getLangFromUrl(Astro.url);
+
 const {
   title = 'Lot Size Calculator | Forex, Gold, Crypto & Futures',
   description = 'Free lot size calculator for Forex, MT5, Futures, Gold, US30, NAS100 & Bitcoin. Calculate your trading position size accurately for better risk management.',
   keywords = 'lot size calculator, position size calculator, forex lot size calculator, lot size calculator forex, gold lot size calculator, lot size calculator mt5, futures lot size calculator, us30 lot size calculator, lot size calculator futures, nas100 lot size calculator, mt5 lot size calculator, bitcoin lot size calculator, forex lot size calculator mt5, metatrader lot size calculator, trading lot size calculator',
   ogImage = '/og-image.png'
 } = Astro.props;
+
+// Generate alternate URLs for hreflang tags
+const pathname = Astro.url.pathname;
+const basePath = lang === 'en' ? pathname : pathname.replace(`/${lang}`, '') || '/';
+const origin = Astro.site ? Astro.site.origin : Astro.url.origin;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,6 +41,13 @@ const {
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
     
+    <!-- Alternate Language Links for Global SEO -->
+    {Object.keys(languages).map((l) => {
+      const href = l === 'en' ? basePath : `/${l}${basePath === '/' ? '' : basePath}`;
+      return <link rel="alternate" hreflang={l} href={`${origin}${href}`} />;
+    })}
+    <link rel="alternate" hreflang="x-default" href={`${origin}${basePath}`} />
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url} />

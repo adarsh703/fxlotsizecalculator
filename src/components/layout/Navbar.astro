@@ -1,11 +1,17 @@
 ---
 import ThemeToggle from './ThemeToggle.astro';
+import LanguagePicker from './LanguagePicker.astro';
 import Logo from '../ui/Logo.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const prefix = lang === 'en' ? '' : `/${lang}`;
 ---
 
 <nav class="sticky top-0 z-50 bg-canvas/80 backdrop-blur-sm border-b border-hairline relative">
   <div class="max-w-[1400px] w-full mx-auto px-6 h-16 flex items-center justify-between">
-    <a href="/" class="flex items-center group">
+    <a href={`${prefix}/`} class="flex items-center group">
       <Logo className="w-8 h-8 mr-2 transition-transform group-hover:scale-105" />
       <span class="flex items-baseline">
         <span class="font-semibold text-ink tracking-tight text-lg">fxlotsizecalculator</span>
@@ -15,21 +21,22 @@ import Logo from '../ui/Logo.astro';
     
     <!-- Desktop Menu -->
     <div class="hidden md:flex items-center gap-6 mr-auto ml-8">
-      <a href="/forex" class="text-body text-sm hover:text-ink transition-colors">Forex</a>
-      <a href="/gold" class="text-body text-sm hover:text-ink transition-colors">Gold</a>
-      <a href="/indices" class="text-body text-sm hover:text-ink transition-colors">Indices</a>
-      <a href="/crypto" class="text-body text-sm hover:text-ink transition-colors">Crypto</a>
-      <a href="/futures" class="text-body text-sm hover:text-ink transition-colors">Futures</a>
-      <a href="/margin" class="text-body text-sm hover:text-ink transition-colors">Margin</a>
-      <a href="/swap" class="text-body text-sm hover:text-ink transition-colors">Swap</a>
+      <a href={`${prefix}/forex`} class="text-body text-sm hover:text-ink transition-colors">{t('nav.forex')}</a>
+      <a href={`${prefix}/gold`} class="text-body text-sm hover:text-ink transition-colors">{t('nav.gold')}</a>
+      <a href={`${prefix}/indices`} class="text-body text-sm hover:text-ink transition-colors">{t('nav.indices')}</a>
+      <a href={`${prefix}/crypto`} class="text-body text-sm hover:text-ink transition-colors">{t('nav.crypto')}</a>
+      <a href={`${prefix}/futures`} class="text-body text-sm hover:text-ink transition-colors">{t('nav.futures')}</a>
+      <a href={`${prefix}/margin`} class="text-body text-sm hover:text-ink transition-colors">{t('nav.margin')}</a>
+      <a href={`${prefix}/swap`} class="text-body text-sm hover:text-ink transition-colors">{t('nav.swap')}</a>
     </div>
 
     <div class="flex items-center gap-4">
       <div class="hidden md:flex items-center gap-4">
-        <a href="/#faq" class="text-body text-sm hover:text-ink transition-colors">FAQ</a>
-        <a href="/#how-it-works" class="text-body text-sm hover:text-ink transition-colors">How It Works</a>
+        <a href={`${prefix}/#faq`} class="text-body text-sm hover:text-ink transition-colors">{t('nav.faq')}</a>
+        <a href={`${prefix}/#how-it-works`} class="text-body text-sm hover:text-ink transition-colors">{t('nav.howItWorks')}</a>
         <div class="h-4 w-px bg-hairline"></div>
       </div>
+      <LanguagePicker />
       <ThemeToggle />
       
       <!-- Mobile Hamburger Button -->
@@ -45,16 +52,16 @@ import Logo from '../ui/Logo.astro';
   <!-- Mobile Menu Dropdown -->
   <div id="mobile-menu" class="hidden md:hidden absolute top-16 left-0 right-0 bg-canvas border-b border-hairline px-6 py-4 shadow-xl">
     <div class="flex flex-col gap-4">
-      <a href="/forex" class="text-body font-medium hover:text-ink transition-colors">Forex</a>
-      <a href="/gold" class="text-body font-medium hover:text-ink transition-colors">Gold</a>
-      <a href="/indices" class="text-body font-medium hover:text-ink transition-colors">Indices</a>
-      <a href="/crypto" class="text-body font-medium hover:text-ink transition-colors">Crypto</a>
-      <a href="/futures" class="text-body font-medium hover:text-ink transition-colors">Futures</a>
-      <a href="/margin" class="text-body font-medium hover:text-ink transition-colors">Margin</a>
-      <a href="/swap" class="text-body font-medium hover:text-ink transition-colors">Swap</a>
+      <a href={`${prefix}/forex`} class="text-body font-medium hover:text-ink transition-colors">{t('nav.forex')}</a>
+      <a href={`${prefix}/gold`} class="text-body font-medium hover:text-ink transition-colors">{t('nav.gold')}</a>
+      <a href={`${prefix}/indices`} class="text-body font-medium hover:text-ink transition-colors">{t('nav.indices')}</a>
+      <a href={`${prefix}/crypto`} class="text-body font-medium hover:text-ink transition-colors">{t('nav.crypto')}</a>
+      <a href={`${prefix}/futures`} class="text-body font-medium hover:text-ink transition-colors">{t('nav.futures')}</a>
+      <a href={`${prefix}/margin`} class="text-body font-medium hover:text-ink transition-colors">{t('nav.margin')}</a>
+      <a href={`${prefix}/swap`} class="text-body font-medium hover:text-ink transition-colors">{t('nav.swap')}</a>
       <hr class="border-hairline" />
-      <a href="/#faq" class="text-body font-medium hover:text-ink transition-colors">FAQ</a>
-      <a href="/#how-it-works" class="text-body font-medium hover:text-ink transition-colors">How It Works</a>
+      <a href={`${prefix}/#faq`} class="text-body font-medium hover:text-ink transition-colors">{t('nav.faq')}</a>
+      <a href={`${prefix}/#how-it-works`} class="text-body font-medium hover:text-ink transition-colors">{t('nav.howItWorks')}</a>
     </div>
   </div>
 </nav>

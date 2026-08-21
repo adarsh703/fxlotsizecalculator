@@ -1,0 +1,11 @@
+---
+import CryptoPage from '../../components/pages/CryptoPage.astro';
+import { languages } from '../../i18n/ui';
+
+export function getStaticPaths() {
+  return Object.keys(languages)
+    .filter(lang => lang !== 'en')
+    .map(lang => ({ params: { lang } }));
+}
+---
+<CryptoPage />
