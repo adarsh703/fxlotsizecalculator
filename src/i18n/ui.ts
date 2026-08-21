@@ -19,6 +19,7 @@ export const ui = {
     'nav.swap': 'Swap',
     'nav.faq': 'FAQ',
     'nav.howItWorks': 'How It Works',
+    'nav.blogs': 'Blogs',
   
     'waitlist.title': 'Join the Waitlist & Shape the Product',
     'waitlist.subtitle': 'Tell us what you think to lock in a 50% early-bird discount.',
@@ -47,6 +48,7 @@ export const ui = {
     'nav.swap': 'Swap',
     'nav.faq': 'Preguntas Frecuentes',
     'nav.howItWorks': 'Cómo Funciona',
+    'nav.blogs': 'Blogs',
   
     'waitlist.title': 'Únete a la lista de espera y da forma al producto',
     'waitlist.subtitle': 'Dinos qué piensas para asegurar un descuento del 50%.',
@@ -75,6 +77,7 @@ export const ui = {
     'nav.swap': 'Swap',
     'nav.faq': 'Perguntas Frequentes',
     'nav.howItWorks': 'Como Funciona',
+    'nav.blogs': 'Blogs',
   
     'waitlist.title': 'Junte-se à lista de espera e molde o produto',
     'waitlist.subtitle': 'Diga-nos o que você acha para garantir 50% de desconto.',
@@ -103,6 +106,7 @@ export const ui = {
     'nav.swap': 'スワップ',
     'nav.faq': 'よくある質問',
     'nav.howItWorks': '使い方',
+    'nav.blogs': 'ブログ',
   
     'waitlist.title': 'ウェイトリストに参加して製品作りに参加する',
     'waitlist.subtitle': 'ご意見をお聞かせいただき、50%の早期割引を確保してください。',
@@ -131,6 +135,7 @@ export const ui = {
     'nav.swap': 'Swap',
     'nav.faq': 'FAQ',
     'nav.howItWorks': 'Cara Kerja',
+    'nav.blogs': 'Blog',
   
     'waitlist.title': 'Bergabung dengan Daftar Tunggu & Bentuk Produk',
     'waitlist.subtitle': 'Beri tahu kami pendapat Anda untuk mengunci diskon 50%.',

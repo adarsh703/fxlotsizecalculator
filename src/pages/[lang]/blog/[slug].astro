@@ -1,0 +1,73 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+import { getLangFromUrl } from '../../../i18n/utils';
+import { languages } from '../../../i18n/ui';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  const langs = Object.keys(languages).filter(l => l !== 'en');
+  
+  return langs.flatMap(lang => 
+    posts.map(post => ({
+      params: { lang, slug: post.id },
+      props: { post },
+    }))
+  );
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const lang = getLangFromUrl(Astro.url);
+---
+
+<Layout 
+  title={`${post.data.title} | fxlotsizecalculator.com`}
+  description={post.data.description}
+>
+  <main class="min-h-screen pt-24 pb-20">
+    <article class="max-w-3xl mx-auto px-4 md:px-6">
+      <header class="mb-10 text-center">
+        {post.data.tags && post.data.tags.length > 0 && (
+          <div class="flex justify-center gap-2 mb-4">
+            {post.data.tags.map(tag => (
+              <span class="px-3 py-1 bg-canvas-soft-2 text-link text-xs font-semibold rounded-full border border-hairline">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+        <h1 class="text-3xl md:text-5xl font-bold tracking-tight text-ink mb-6">{post.data.title}</h1>
+        <div class="flex items-center justify-center gap-4 text-sm text-mute">
+          <span>By {post.data.author}</span>
+          <span>•</span>
+          <time datetime={post.data.pubDate.toISOString()}>
+            {post.data.pubDate.toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })}
+          </time>
+        </div>
+      </header>
+
+      {post.data.image && (
+        <div class="mb-12 rounded-2xl overflow-hidden shadow-card border border-hairline">
+          <img src={post.data.image} alt={post.data.title} class="w-full h-auto object-cover" />
+        </div>
+      )}
+
+      <!-- Typography wrapper -->
+      <div class="prose prose-lg dark:prose-invert prose-blue max-w-none prose-headings:font-bold prose-a:text-link hover:prose-a:text-link-deep prose-img:rounded-xl prose-img:border prose-img:border-hairline">
+        <Content />
+      </div>
+
+      <div class="mt-16 pt-8 border-t border-hairline text-center">
+        <p class="text-body mb-4">Ready to calculate your exact lot sizes in seconds?</p>
+        <a href={`/${lang}`} class="inline-flex items-center justify-center bg-ink text-canvas hover:bg-body px-6 py-3 rounded-lg font-semibold transition-colors shadow-card">
+          Try the Free Calculator
+        </a>
+      </div>
+    </article>
+  </main>
+</Layout>

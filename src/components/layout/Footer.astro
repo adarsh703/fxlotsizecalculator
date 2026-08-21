@@ -44,7 +44,7 @@ const prefix = lang === 'en' ? '' : `/${lang}`;
       <div class="flex flex-col">
         <h3 class="font-mono text-xs uppercase tracking-wider text-mute mb-4">{t('footer.company')}</h3>
         <ul class="flex flex-col gap-3">
-          <li><a href={`${prefix}/blog`} class="text-sm text-body hover:text-ink transition-colors">Blogs</a></li>
+          <li><a href={`${prefix}/blog`} class="text-sm text-body hover:text-ink transition-colors">{t('nav.blogs')}</a></li>
           <li><a href={`${prefix}/about`} class="text-sm text-body hover:text-ink transition-colors">{t('footer.about')}</a></li>
           <li><a href={`${prefix}/contact`} class="text-sm text-body hover:text-ink transition-colors">{t('footer.contact')}</a></li>
           <li><a href={`${prefix}/privacy`} class="text-sm text-body hover:text-ink transition-colors">{t('footer.privacy')}</a></li>

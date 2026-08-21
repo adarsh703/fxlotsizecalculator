@@ -1,0 +1,73 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
+import { languages } from '../../../i18n/ui';
+
+export function getStaticPaths() {
+  return Object.keys(languages)
+    .filter(lang => lang !== 'en')
+    .map(lang => ({ params: { lang } }));
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// Fetch all blog posts
+const posts = await getCollection('blog');
+posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<Layout 
+  title="Forex & Trading Blog | fxlotsizecalculator.com" 
+  description="Expert guides on position sizing, risk management, and trading strategies for Forex, Crypto, and Indices."
+>
+  <main class="min-h-screen pt-24 pb-20">
+    <div class="max-w-4xl mx-auto px-4 md:px-6">
+      <header class="mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-ink mb-4">Trading Guides & Insights</h1>
+        <p class="text-lg text-body">Master risk management, learn how to size your positions accurately, and pass your prop firm challenges.</p>
+      </header>
+
+      <div class="grid gap-8">
+        {posts.map((post) => (
+          <article class="bg-canvas rounded-xl shadow-card p-6 md:p-8 hover:shadow-card-hover transition-shadow border border-hairline">
+            <div class="flex flex-col gap-2">
+              <div class="flex items-center gap-2 text-sm text-mute mb-2">
+                <time datetime={post.data.pubDate.toISOString()}>
+                  {post.data.pubDate.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })}
+                </time>
+                {post.data.tags && post.data.tags.length > 0 && (
+                  <>
+                    <span>•</span>
+                    <span class="text-link font-medium">{post.data.tags[0]}</span>
+                  </>
+                )}
+              </div>
+              <h2 class="text-2xl font-bold text-ink">
+                <a href={`/${lang}/blog/${post.id}`} class="hover:text-link transition-colors">
+                  {post.data.title}
+                </a>
+              </h2>
+              <p class="text-body leading-relaxed mt-2">
+                {post.data.description}
+              </p>
+              <div class="mt-4">
+                <a href={`/${lang}/blog/${post.id}`} class="text-sm font-semibold text-link hover:text-link-deep flex items-center gap-1">
+                  Read Article
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </main>
+</Layout>
