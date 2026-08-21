@@ -10,6 +10,8 @@ interface Props {
 
 import { getLangFromUrl } from '../i18n/utils';
 import { languages } from '../i18n/ui';
+import Navbar from '../components/layout/Navbar.astro';
+import Footer from '../components/layout/Footer.astro';
 const lang = getLangFromUrl(Astro.url);
 
 const {
@@ -99,6 +101,8 @@ const origin = Astro.site ? Astro.site.origin : Astro.url.origin;
     })} />
   </head>
   <body class="bg-canvas-soft text-ink antialiased min-h-screen flex flex-col font-sans">
+    <Navbar />
     <slot />
+    <Footer />
   </body>
 </html>

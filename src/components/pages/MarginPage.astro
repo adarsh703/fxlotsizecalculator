@@ -2,10 +2,8 @@
 import { getLangFromUrl, useMetaTranslations } from '../../i18n/utils';
 
 import Layout from '../../layouts/Layout.astro';
-import Navbar from '../layout/Navbar.astro';
 import Hero from '../sections/Hero.astro';
 import Features from '../sections/Features.astro';
-import Footer from '../layout/Footer.astro';
 import { MarginCalculator } from '../calculator/MarginCalculator';
 const lang = getLangFromUrl(Astro.url);
 const tm = useMetaTranslations(lang);
@@ -17,8 +15,7 @@ const tm = useMetaTranslations(lang);
   description="Calculate your required margin for Forex, Crypto, Indices, and Commodities. Know exactly how much capital you need to open a position based on your leverage."
   keywords="margin calculator, forex margin calculator, crypto margin calculator, calculate margin leverage"
 >
-  <Navbar />
-  <main>
+    <main>
     <Hero 
       eyebrow="Margin Calculator"
       title="Calculate your <span class='text-teal-500'>Required Margin</span>"
@@ -27,5 +24,4 @@ const tm = useMetaTranslations(lang);
     <MarginCalculator client:load />
     <Features />
   </main>
-  <Footer />
-</Layout>
+  </Layout>

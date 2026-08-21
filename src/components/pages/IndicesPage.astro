@@ -2,13 +2,11 @@
 import { getLangFromUrl, useMetaTranslations } from '../../i18n/utils';
 
 import Layout from '../../layouts/Layout.astro';
-import Navbar from '../layout/Navbar.astro';
 import Hero from '../sections/Hero.astro';
 import Features from '../sections/Features.astro';
 import ProTeaser from '../sections/ProTeaser.astro';
 import HowItWorks from '../sections/HowItWorks.astro';
 import FAQ from '../sections/FAQ.astro';
-import Footer from '../layout/Footer.astro';
 import { Calculator } from '../calculator/Calculator';
 const lang = getLangFromUrl(Astro.url);
 const tm = useMetaTranslations(lang);
@@ -21,8 +19,7 @@ const tm = useMetaTranslations(lang);
   keywords="indices lot size calculator, futures lot size calculator, us30 lot size calculator, lot size calculator futures, nas100 lot size calculator, dow jones position size"
   ogImage="/og-indices.png"
 >
-  <Navbar />
-  <main>
+    <main>
     <Hero 
       eyebrow="US30 & NAS100 Lot Size Calculator"
       title="Calculate your <span class='text-purple-500'>Indices</span> lot size. Instantly."
@@ -34,5 +31,4 @@ const tm = useMetaTranslations(lang);
     <HowItWorks />
     <FAQ />
   </main>
-  <Footer />
-</Layout>
+  </Layout>

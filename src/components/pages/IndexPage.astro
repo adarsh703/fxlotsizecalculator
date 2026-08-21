@@ -1,13 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Navbar from '../layout/Navbar.astro';
 import Hero from '../sections/Hero.astro';
 import Features from '../sections/Features.astro';
 import ProTeaser from '../sections/ProTeaser.astro';
 import HowItWorks from '../sections/HowItWorks.astro';
 import FAQ from '../sections/FAQ.astro';
 import SEOContent from '../sections/SEOContent.astro';
-import Footer from '../layout/Footer.astro';
 import { Calculator } from '../calculator/Calculator';
 import { getLangFromUrl, useMetaTranslations } from '../../i18n/utils';
 
@@ -19,8 +17,7 @@ const tm = useMetaTranslations(lang);
   title={tm('home.title')}
   description={tm('home.desc')}
 >
-  <Navbar />
-  <main>
+    <main>
     <Hero />
     <Calculator lang={lang} client:load />
     <ProTeaser />
@@ -29,5 +26,4 @@ const tm = useMetaTranslations(lang);
     <SEOContent />
     <FAQ />
   </main>
-  <Footer />
-</Layout>
+  </Layout>
