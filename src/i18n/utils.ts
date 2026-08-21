@@ -18,3 +18,9 @@ export { useFeaturesTranslations } from './ui';
 export { useFooterTranslations } from './ui';
 export { useStepsTranslations } from './ui';
 export { useProTranslations } from './ui';
+
+export function useWaitlistTranslations(lang: keyof typeof ui) {
+  return function t(key: keyof typeof ui[typeof defaultLang]) {
+    return ui[lang][key] || ui[defaultLang][key];
+  }
+}

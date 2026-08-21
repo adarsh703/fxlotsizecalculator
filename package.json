@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "deploy": "npm run build && wrangler deploy",
+    "deploy": "npm run build && wrangler pages deploy dist --project-name fxlotsizecalculator --commit-dirty=true",
     "preview": "npm run build && wrangler dev",
     "astro": "astro",
     "generate-types": "wrangler types"
