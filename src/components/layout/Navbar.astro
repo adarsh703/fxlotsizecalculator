@@ -10,17 +10,17 @@ const prefix = lang === 'en' ? '' : `/${lang}`;
 ---
 
 <nav class="sticky top-0 z-50 bg-canvas/80 backdrop-blur-sm border-b border-hairline relative">
-  <div class="max-w-[1400px] w-full mx-auto px-6 h-16 flex items-center justify-between">
-    <a href={`${prefix}/`} class="flex items-center group">
-      <Logo className="w-8 h-8 mr-2 transition-transform group-hover:scale-105" />
-      <span class="flex items-baseline">
-        <span class="font-semibold text-ink tracking-tight text-lg">fxlotsizecalculator</span>
-        <span class="text-mute text-sm ml-0.5">.com</span>
+  <div class="max-w-[1400px] w-full mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+    <a href={`${prefix}/`} class="flex items-center group shrink-0 min-w-0">
+      <Logo className="w-8 h-8 mr-2 transition-transform group-hover:scale-105 shrink-0" />
+      <span class="flex items-baseline min-w-0">
+        <span class="font-semibold text-ink tracking-tight text-base sm:text-lg truncate">fxlotsizecalculator</span>
+        <span class="text-mute text-sm ml-0.5 hidden sm:inline">.com</span>
       </span>
     </a>
     
     <!-- Desktop Menu -->
-    <div class="hidden md:flex items-center gap-6 mr-auto ml-8">
+    <div class="hidden lg:flex items-center gap-6 mr-auto ml-8">
       <a href={`${prefix}/forex`} class="text-body text-sm hover:text-ink transition-colors">{t('nav.forex')}</a>
       <a href={`${prefix}/gold`} class="text-body text-sm hover:text-ink transition-colors">{t('nav.gold')}</a>
       <a href={`${prefix}/indices`} class="text-body text-sm hover:text-ink transition-colors">{t('nav.indices')}</a>
@@ -30,8 +30,8 @@ const prefix = lang === 'en' ? '' : `/${lang}`;
       <a href={`${prefix}/swap`} class="text-body text-sm hover:text-ink transition-colors">{t('nav.swap')}</a>
     </div>
 
-    <div class="flex items-center gap-4">
-      <div class="hidden md:flex items-center gap-4">
+    <div class="flex items-center gap-2 sm:gap-4 shrink-0 ml-4">
+      <div class="hidden lg:flex items-center gap-4">
         <a href={`${prefix}/#faq`} class="text-body text-sm hover:text-ink transition-colors">{t('nav.faq')}</a>
         <a href={`${prefix}/#how-it-works`} class="text-body text-sm hover:text-ink transition-colors">{t('nav.howItWorks')}</a>
         <div class="h-4 w-px bg-hairline"></div>
@@ -40,7 +40,7 @@ const prefix = lang === 'en' ? '' : `/${lang}`;
       <ThemeToggle />
       
       <!-- Mobile Hamburger Button -->
-      <button id="mobile-menu-btn" class="md:hidden ml-2 p-1 text-body hover:text-ink" aria-label="Toggle Menu">
+      <button id="mobile-menu-btn" class="lg:hidden p-1 text-body hover:text-ink" aria-label="Toggle Menu">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path id="hamburger-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
           <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -50,7 +50,7 @@ const prefix = lang === 'en' ? '' : `/${lang}`;
   </div>
 
   <!-- Mobile Menu Dropdown -->
-  <div id="mobile-menu" class="hidden md:hidden absolute top-16 left-0 right-0 bg-canvas border-b border-hairline px-6 py-4 shadow-xl">
+  <div id="mobile-menu" class="hidden lg:hidden absolute top-16 left-0 right-0 bg-canvas border-b border-hairline px-6 py-4 shadow-xl">
     <div class="flex flex-col gap-4">
       <a href={`${prefix}/forex`} class="text-body font-medium hover:text-ink transition-colors">{t('nav.forex')}</a>
       <a href={`${prefix}/gold`} class="text-body font-medium hover:text-ink transition-colors">{t('nav.gold')}</a>
@@ -86,9 +86,6 @@ const prefix = lang === 'en' ? '' : `/${lang}`;
     }
   };
 
-  // Run on initial load
   setupMobileMenu();
-
-  // Run on Astro view transitions if they are enabled
   document.addEventListener('astro:page-load', setupMobileMenu);
 </script>
