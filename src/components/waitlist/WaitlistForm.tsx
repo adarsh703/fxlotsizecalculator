@@ -21,10 +21,30 @@ export function WaitlistForm({ lang = defaultLang }: WaitlistFormProps) {
 
   const t = useWaitlistTranslations(lang as any);
 
-  const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // In the future, you would send this to Formspree, Mailchimp, or your own backend
-    console.log({ wouldBuy, price, email });
+    
+    // TODO: Replace this URL with your own Formspree endpoint (e.g. https://formspree.io/f/your_id)
+    const FORMSPREE_URL = "https://formspree.io/f/placeholder";
+    
+    try {
+      if (FORMSPREE_URL.includes("placeholder")) {
+        // If it's a placeholder, just simulate a successful submit for now
+        console.log("Simulating submit because Formspree URL is placeholder", { wouldBuy, price, email });
+      } else {
+        await fetch(FORMSPREE_URL, {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ wouldBuy, price, email, source: 'Pro Calculator Waitlist' })
+        });
+      }
+    } catch (error) {
+      console.error("Error submitting form", error);
+    }
+
     setSubmitted(true);
     
     // Fire confetti!

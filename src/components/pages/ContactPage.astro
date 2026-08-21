@@ -9,15 +9,31 @@ const tm = useMetaTranslations(lang);
 
 <Layout 
   title="Contact Us | fxlotsizecalculator.com"
-  description="Contact page is coming soon."
+  description="Get in touch with the fxlotsizecalculator.com team for support, feedback, or business inquiries."
 >
   <main class="max-w-3xl mx-auto px-6 py-24 text-center">
-    <h1 class="text-3xl font-bold text-ink mb-8">Contact Us</h1>
+    <h1 class="text-4xl font-bold text-ink mb-6">Contact Us</h1>
     
-    <div class="prose prose-slate dark:prose-invert max-w-none space-y-6 text-body mx-auto">
-      <p class="text-lg">
-        Our contact form is currently under construction. Please check back later!
+    <div class="bg-canvas rounded-xl shadow-card p-8 border border-hairline mx-auto max-w-xl text-center">
+      <div class="w-12 h-12 bg-ink text-canvas rounded-full flex items-center justify-center mx-auto mb-6">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+        </svg>
+      </div>
+      <h2 class="text-2xl font-semibold text-ink mb-3">We'd love to hear from you</h2>
+      <p class="text-body mb-8 leading-relaxed">
+        Whether you have a question about the calculator, a feature request, or just want to say hi, feel free to drop us a message. We try to respond to all inquiries within 24 hours.
       </p>
+      
+      <a 
+        href="mailto:support@fxlotsizecalculator.com" 
+        class="inline-flex items-center justify-center gap-2 bg-ink text-canvas hover:bg-body px-8 py-3 rounded-lg font-medium transition-colors shadow-sm"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path>
+        </svg>
+        support@fxlotsizecalculator.com
+      </a>
     </div>
   </main>
 </Layout>
