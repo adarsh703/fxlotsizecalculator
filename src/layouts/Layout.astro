@@ -6,6 +6,7 @@ interface Props {
   description?: string;
   keywords?: string;
   ogImage?: string;
+  canonicalUrl?: string;
 }
 
 import { getLangFromUrl } from '../i18n/utils';
@@ -18,7 +19,8 @@ const {
   title = 'Lot Size Calculator | Forex, Gold, Crypto & Futures',
   description = 'Free lot size calculator for Forex, MT5, Futures, Gold, US30, NAS100 & Bitcoin. Calculate your trading position size accurately for better risk management.',
   keywords = 'lot size calculator, position size calculator, forex lot size calculator, lot size calculator forex, gold lot size calculator, lot size calculator mt5, futures lot size calculator, us30 lot size calculator, lot size calculator futures, nas100 lot size calculator, mt5 lot size calculator, bitcoin lot size calculator, forex lot size calculator mt5, metatrader lot size calculator, trading lot size calculator',
-  ogImage = '/og-image.png'
+  ogImage = '/og-image.png',
+  canonicalUrl = Astro.url.href
 } = Astro.props;
 
 // Generate alternate URLs for hreflang tags
@@ -40,6 +42,7 @@ const origin = Astro.site ? Astro.site.origin : Astro.url.origin;
     <meta name="generator" content={Astro.generator} />
     
     <title>{title}</title>
+    <link rel="canonical" href={canonicalUrl} />
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
     
@@ -64,7 +67,6 @@ const origin = Astro.site ? Astro.site.origin : Astro.url.origin;
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={new URL(ogImage, Astro.url)} />
     
-    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site || Astro.url).toString()} />
     
     <!-- Prevent dark mode FOUC -->
     <script is:inline>
@@ -99,6 +101,15 @@ const origin = Astro.site ? Astro.site.origin : Astro.url.origin;
         }
       ]
     })} />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TF32BQRC1G"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-TF32BQRC1G');
+    </script>
   </head>
   <body class="bg-canvas-soft text-ink antialiased min-h-screen flex flex-col font-sans">
     <Navbar />
