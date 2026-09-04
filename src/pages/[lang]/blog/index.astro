@@ -25,8 +25,8 @@ posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
   <main class="min-h-screen pt-24 pb-20">
     <div class="max-w-4xl mx-auto px-4 md:px-6">
       <header class="mb-12">
-        <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-ink mb-4">Trading Guides & Insights</h1>
-        <p class="text-lg text-body">Master risk management, learn how to size your positions accurately, and pass your prop firm challenges.</p>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-ink mb-4">{t('blog.title')}</h1>
+        <p class="text-lg text-body">{t('blog.subtitle')}</p>
       </header>
 
       <div class="grid gap-8">
@@ -58,7 +58,7 @@ posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
               </p>
               <div class="mt-4">
                 <a href={`/${lang}/blog/${post.id}`} class="text-sm font-semibold text-link hover:text-link-deep flex items-center gap-1">
-                  Read Article
+                  {t('blog.readArticle')}
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
                   </svg>

@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection, render } from 'astro:content';
-import { getLangFromUrl } from '../../i18n/utils';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -14,6 +14,7 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <Layout 
@@ -34,7 +35,7 @@ const lang = getLangFromUrl(Astro.url);
         )}
         <h1 class="text-3xl md:text-5xl font-bold tracking-tight text-ink mb-6">{post.data.title}</h1>
         <div class="flex items-center justify-center gap-4 text-sm text-mute">
-          <span>By {post.data.author}</span>
+          <span>{t('blog.by')} {post.data.author}</span>
           <span>•</span>
           <time datetime={post.data.pubDate.toISOString()}>
             {post.data.pubDate.toLocaleDateString('en-US', {
@@ -58,9 +59,9 @@ const lang = getLangFromUrl(Astro.url);
       </div>
 
       <div class="mt-16 pt-8 border-t border-hairline text-center">
-        <p class="text-body mb-4">Ready to calculate your exact lot sizes in seconds?</p>
+        <p class="text-body mb-4">{t('blog.cta.title')}</p>
         <a href="/" class="inline-flex items-center justify-center bg-ink text-canvas hover:bg-body px-6 py-3 rounded-lg font-semibold transition-colors shadow-card">
-          Try the Free Calculator
+          {t('blog.cta.btn')}
         </a>
       </div>
     </article>
